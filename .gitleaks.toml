@@ -1,0 +1,36 @@
+# Configuration GitLeaks personnalisée
+# Étend les règles par défaut avec des règles spécifiques au projet
+
+title = "SecOps Pipeline - GitLeaks Config"
+
+# ─── Règle 1 : Mots de passe faibles hardcodés ───────────────
+[[rules]]
+id = "hardcoded-weak-password"
+description = "Mot de passe faible hardcodé détecté"
+regex = '''(?i)(password|passwd|pwd)\s*=\s*["\'](admin|test|root|123456|password|changeme|secret)["\']'''
+severity = "ERROR"
+tags = ["security", "owasp-a02"]
+
+# ─── Règle 2 : Clé secrète hardcodée ─────────────────────────
+[[rules]]
+id = "hardcoded-secret-key"
+description = "Clé secrète hardcodée détectée"
+regex = '''(?i)(secret_key|secretkey)\s*=\s*["\'][^"\']{8,}["\']'''
+severity = "ERROR"
+tags = ["security", "owasp-a02"]
+
+# ─── Règle 3 : Token API générique ───────────────────────────
+[[rules]]
+id = "hardcoded-api-token"
+description = "Token API hardcodé détecté"
+regex = '''(?i)(api_token|api_key|apikey)\s*=\s*["\'][^"\']{8,}["\']'''
+severity = "ERROR"
+tags = ["security", "owasp-a02"]
+
+# ─── Fichiers à ignorer ───────────────────────────────────────
+[allowlist]
+description = "Fichiers légitimes à ignorer"
+paths = [
+    '''.env.example''',
+    '''tests/.*''',
+]

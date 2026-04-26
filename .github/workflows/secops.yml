@@ -8,12 +8,13 @@ on:
 
 jobs:
 
-  # ─── Job 1 : SAST avec Semgrep ───────────────────────────
+  # ─── Job 1 : SAST avec Semgrep ───────────────────────────────
   semgrep:
     name: 🔍 SAST - Semgrep
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      # ✅ Fix : checkout@v4 remplace @v3 (Node.js 24)
+      - uses: actions/checkout@v4
       - name: Run Semgrep
         uses: semgrep/semgrep-action@v1
         with:
@@ -22,27 +23,30 @@ jobs:
             p/secrets
             p/owasp-top-ten
 
-  # ─── Job 2 : Secrets avec GitLeaks ──────────────────────
+  # ─── Job 2 : Secrets avec GitLeaks ──────────────────────────
   gitleaks:
     name: 🔑 Secrets - GitLeaks
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      # ✅ Fix : checkout@v4 remplace @v3 (Node.js 24)
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Run GitLeaks
-        uses: gitleaks/gitleaks-action@v2
+        # ✅ Fix : gitleaks-action@v3 remplace @v2 (Node.js 24)
+        uses: gitleaks/gitleaks-action@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  # ─── Job 3 : Tests unitaires ─────────────────────────────
+  # ─── Job 3 : Tests unitaires ─────────────────────────────────
   tests:
     name: 🧪 Tests unitaires
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      # ✅ Fix : checkout@v4 remplace @v3 (Node.js 24)
+      - uses: actions/checkout@v4
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       - name: Install dependencies
