@@ -13,10 +13,10 @@ jobs:
     name: 🔍 SAST - Semgrep
     runs-on: ubuntu-latest
     steps:
-      # ✅ Fix : checkout@v4 remplace @v3 (Node.js 24)
-      - uses: actions/checkout@v4
+      # SHA complet = immuable = protection supply chain
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Run Semgrep
-        uses: semgrep/semgrep-action@v1
+        uses: semgrep/semgrep-action@713efdd345f3035192eaa63f56867b88e63e4e5d # v1
         with:
           config: >-
             p/python
@@ -28,13 +28,11 @@ jobs:
     name: 🔑 Secrets - GitLeaks
     runs-on: ubuntu-latest
     steps:
-      # ✅ Fix : checkout@v4 remplace @v3 (Node.js 24)
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           fetch-depth: 0
       - name: Run GitLeaks
-        # ✅ Fix : gitleaks-action@v3 remplace @v2 (Node.js 24)
-        uses: gitleaks/gitleaks-action@v2
+        uses: gitleaks/gitleaks-action@dcedce43c6f43de0b836d1fe38946645c9c638dc # v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -43,10 +41,9 @@ jobs:
     name: 🧪 Tests unitaires
     runs-on: ubuntu-latest
     steps:
-      # ✅ Fix : checkout@v4 remplace @v3 (Node.js 24)
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5
         with:
           python-version: '3.11'
       - name: Install dependencies
