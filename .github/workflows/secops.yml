@@ -34,7 +34,7 @@ jobs:
           fetch-depth: 0
       - name: Run GitLeaks
         # ✅ Fix : gitleaks-action@v3 remplace @v2 (Node.js 24)
-        uses: gitleaks/gitleaks-action@v3
+        uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
