@@ -1,0 +1,12 @@
+# Base de données locale
+*.db
+
+# Fichiers Python compilés
+__pycache__/
+*.pyc
+
+# Variables d'environnement (contient les vrais secrets)
+.env
+
+# Dossier virtuel Python
+venv/
